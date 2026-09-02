@@ -1,0 +1,23 @@
+# Core
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+
+# Serving
+fastapi
+uvicorn
+pydantic
+
+# Explainability & drift
+shap
+lime
+evidently
+
+# Tracking
+mlflow
+
+# Plotting & tests
+matplotlib
+pytest

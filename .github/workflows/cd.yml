@@ -1,0 +1,43 @@
+name: CD (deploy champion)
+
+# Runs AFTER a promotion, never before it. Trigger it:
+#   - manually (workflow_dispatch), or
+#   - from the retrain job via a repository_dispatch when the guardrail PROMOTES.
+# Auto-deploy is gated by the guardrail: a model that didn't win never reaches here.
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [champion-promoted]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install
+        run: pip install mlflow scikit-learn xgboost pandas numpy joblib huggingface_hub
+
+      # 1. Export the current @champion snapshot from the registry into serving/.
+      #    MLFLOW_TRACKING_URI points at the hosted registry (a secret in real prod).
+      - name: Export champion snapshot
+        env:
+          MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+        run: python src/export_champion.py
+
+      # 2. Push serving/ to the Hugging Face Space -> HF rebuilds the image.
+      - name: Deploy to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          SPACE_ID: ${{ vars.SPACE_ID }}   # e.g. your-username/credit-distress-model
+        run: |
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+          HfApi(token=os.environ["HF_TOKEN"]).upload_folder(
+              folder_path="serving", repo_id=os.environ["SPACE_ID"], repo_type="space",
+              commit_message="Deploy new champion snapshot")
+          print("deployed serving/ to", os.environ["SPACE_ID"])
+          PY

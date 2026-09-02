@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.DS_Store
+
+# MLflow local store (regenerable; real CD uses a hosted registry)
+mlruns/
+mlflow.db
+
+# Transient runtime output
+logs/
+*.output
+
+# Keep: src/ tests/ docs/ serving/ space/ streamlit_app/ .github/ data/ runs/
+# and the bundled model snapshots those deploy folders need.

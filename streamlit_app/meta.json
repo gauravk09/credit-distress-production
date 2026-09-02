@@ -1,0 +1,5 @@
+{
+  "model": "credit-distress",
+  "version": 3,
+  "threshold": 0.091
+}

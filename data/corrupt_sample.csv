@@ -1,0 +1,9 @@
+case,revolving_utilization,age,times_30_59_days_late,debt_ratio,monthly_income,open_credit_lines,times_90_days_late,real_estate_loans,times_60_89_days_late,dependents
+monster_utilization,50708,45,0,0.3,6000,8,0,1,0,2
+negative_age,0.4,-5,0,0.3,6000,8,0,1,0,2
+missing_income,0.4,45,0,0.3,,8,0,1,0,2
+negative_income,0.4,45,0,0.3,-9000,8,0,1,0,2
+huge_debt_ratio,0.4,45,0,999999,6000,8,0,1,0,2
+sentinel_late_98,0.4,45,98,0.3,6000,8,98,1,98,2
+all_zeros,0,0,0,0,0,0,0,0,0,0
+missing_dependents,0.4,45,0,0.3,6000,8,0,1,0,

@@ -1,0 +1,6 @@
+timestamp,name,threshold,pr_auc,recall,precision,tp,fp,fn,tn,n,positives,params
+2026-08-27T20:46:20,01_baseline,0.5,0.241,0.0439,0.5641,88,68,1917,27927,30000,2005,"{""model"": ""logreg"", ""class_weight"": null, ""impute"": ""median""}"
+2026-08-27T21:12:10,02_threshold,0.091,0.241,0.4723,0.1884,947,4079,1058,23916,30000,2005,"{""model"": ""logreg"", ""class_weight"": null, ""threshold_rule"": ""1/(1+K)"", ""K"": 10}"
+2026-08-27T21:35:00,03_classweight,0.5,0.2941,0.6574,0.1655,1318,6647,687,21348,30000,2005,"{""model"": ""logreg"", ""class_weight"": ""balanced"", ""impute"": ""median""}"
+2026-08-27T23:27:33,04_clipped,0.5,0.3687,0.7451,0.2187,1494,5336,511,22659,30000,2005,"{""model"": ""logreg"", ""class_weight"": ""balanced"", ""clip"": ""1-99pct""}"
+2026-08-28T02:23:27,05_xgboost,0.5,0.3811,0.7661,0.2183,1536,5499,469,22496,30000,2005,"{""model"": ""xgboost"", ""scale_pos_weight"": 13.96, ""n_estimators"": 300, ""max_depth"": 4, ""lr"": 0.05}"
