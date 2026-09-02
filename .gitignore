@@ -3,13 +3,18 @@ __pycache__/
 *.pyc
 .DS_Store
 
+# Local working notes — not published to GitHub
+docs/
+
 # MLflow local store (regenerable; real CD uses a hosted registry)
 mlruns/
 mlflow.db
 
+# Intermediate training artifacts (deploy folders carry their own snapshots)
+src/*.joblib
+src/*.json
+
 # Transient runtime output
 logs/
+runs/
 *.output
-
-# Keep: src/ tests/ docs/ serving/ space/ streamlit_app/ .github/ data/ runs/
-# and the bundled model snapshots those deploy folders need.
